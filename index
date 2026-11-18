@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+  
+:root {
+  /* DLSU-inspired institutional colors */
+  --navy: #006B3F;
+  --navy2: #004B2D;
+  --teal: #00834A;
+  --bg: #F3F6F3;
+  --line: #D5E1D8;
+  --text: #20352A;
+  --muted: #68796F;
+  --white: #FFFFFF;
+
+  --gold: #D6A62E;
+  --green-light: #E8F2EB;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-size: 14px;
+}
+
+/* HEADER */
+header {
+  background: var(--navy2);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-bottom: 3px solid var(--gold);
+}
+
+header h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: .5px;
+  font-weight: 700;
+}
+
+header small {
+  color: #D7E9DE;
+}
+
+/* NAVIGATION */
+nav {
+  display: flex;
+  overflow-x: auto;
+  background: var(--navy);
+  padding: 0 8px;
+  border-bottom: 1px solid #005B36;
+}
+
+nav button {
+  border: 0;
+  background: transparent;
+  color: #E5F0E9;
+  padding: 14px 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .2s ease;
+}
+
+nav button:hover {
+  background: rgba(255,255,255,.10);
+  color: white;
+}
+
+nav button.active {
+  background: rgba(255,255,255,.12);
+  color: white;
+  border-bottom: 3px solid var(--gold);
+}
+
+/* MAIN CONTENT */
+main {
+  max-width: 1400px;
+  padding: 20px;
+  margin: auto;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 55, 30, .04);
+}
+
+.card h3 {
+  margin: 0 0 15px;
+  color: var(--navy2);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+  gap: 12px;
+}
+
+/* FORM FIELDS */
+.field {
+  margin-bottom: 12px;
+}
+
+label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 2px rgba(0, 131, 74, .12);
+}
+
+textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+/* BUTTONS */
+button.primary {
+  background: var(--navy);
+  color: white;
+  border: 1px solid var(--navy);
+  padding: 11px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background .2s ease;
+}
+
+button.primary:hover {
+  background: var(--navy2);
+}
+
+button.secondary {
+  background: var(--green-light);
+  color: var(--navy2);
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.secondary:hover {
+  background: #DCEBE0;
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+/* DASHBOARD KPI */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kpi {
+  background: white;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--navy);
+  padding: 16px;
+  border-radius: 7px;
+}
+
+.kpi small {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.kpi strong {
+  display: block;
+  font-size: 26px;
+  color: var(--navy2);
+  margin-top: 8px;
+}
+
+/* TABLES */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+th {
+  background: var(--green-light);
+  color: var(--navy2);
+  font-weight: 700;
+}
+
+tr:hover td {
+  background: #F7FAF7;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+/* TEXT */
+.muted {
+  color: var(--muted);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ALERT MESSAGES */
+#message {
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  display: none;
+}
+
+#message.error {
+  display: block;
+  background: #FBE9E7;
+  color: #9C2E25;
+  border-left: 4px solid #B3352C;
+}
+
+#message.success {
+  display: block;
+  background: #E8F4EC;
+  color: #24633D;
+  border-left: 4px solid var(--teal);
+}
+
+/* PATIENT SEARCH RESULTS */
+.patient-result {
+  border: 1px solid var(--line);
+  padding: 12px;
+  border-radius: 5px;
+  margin-top: 8px;
+  cursor: pointer;
+  background: white;
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.patient-result:hover {
+  border-color: var(--teal);
+  background: #F0F7F2;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media(max-width:600px) {
+  main {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 13px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h2>HEALTH SERVICES UNIT</h2>
+    <small>DLSU Laguna Campus | Electronic Health Records</small>
+  </div>
+  <div>
+    <div id="userName">Loading account...</div>
+    <small id="userRole"></small>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
+  <button onclick="showPage('patients',this)">Patient Registry</button>
+  <button onclick="showPage('encounter',this)">New Encounter</button>
+  <button onclick="showPage('census',this)">Daily Census</button>
+  <button id="adminNav" class="hidden" onclick="showPage('admin',this)">Admin</button>
+</nav>
+
+<main>
+  <div id="message"></div>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="page">
+    <div class="section-title">
+      <h2>HSU Dashboard</h2>
+      <button class="secondary" onclick="loadDashboard()">Refresh</button>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <small>Today's Encounters</small>
+        <strong id="totalEncounters">0</strong>
+      </div>
+      <div class="kpi">
+        <small>MRR</small>
+        <strong id="countMRR">0</strong>
+      </div>
+      <div class="kpi">
+        <small>LC1</small>
+        <strong id="countLC1">0</strong>
+      </div>
+      <div class="kpi">
+        <small>LC2</small>
+        <strong id="countLC2">0</strong>
+      </div>
+      <div class="kpi">
+        <small>GT</small>
+        <strong id="countGT">0</strong>
+      </div>
+      <div class="kpi">
+        <small>UH</small>
+        <strong id="countUH">0</strong>
+      </div>
+      <div class="kpi">
+        <small>FIELD</small>
+        <strong id="countFIELD">0</strong>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Recent Encounters</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Patient</th>
+              <th>ID Number</th>
+              <th>Clinic</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody id="recentTable">
+            <tr><td colspan="5">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PATIENT REGISTRY -->
+  <section id="patients" class="page hidden">
+    <h2>Patient Registry</h2>
+
+    <div class="card">
+      <h3>Search Patient</h3>
+      <div class="field">
+        <label>Search by ID Number or Patient Name</label>
+        <input id="patientSearch"
+          placeholder="Enter ID Number or Name"
+          oninput="searchPatient()">
+      </div>
+      <div id="patientResults"></div>
+    </div>
+
+    <div class="card">
+      <h3>Register New Patient</h3>
+
+      <div class="grid">
+        <div class="field">
+          <label>ID Number *</label>
+          <input id="pId" required>
+        </div>
+        <div class="field">
+          <label>Patient Name *</label>
+          <input id="pName" required>
+        </div>
+        <div class="field">
+          <label>Sex</label>
+          <select id="pSex">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Birthdate</label>
+          <input id="pBirth" type="date">
+        </div>
+        <div class="field">
+          <label>Grade / Designation</label>
+          <input id="pGrade">
+        </div>
+        <div class="field">
+          <label>Section / Office</label>
+          <input id="pSection">
+        </div>
+        <div class="field">
+          <label>Contact Number</label>
+          <input id="pContact">
+        </div>
+      </div>
+
+      <button class="primary" onclick="registerPatient()">
+        Save Patient
+      </button>
+    </div>
+  </section>
+
+
+  <!-- NEW ENCOUNTER -->
+  <section id="encounter" class="page hidden">
+    <h2>New HSU Encounter</h2>
+
+    <div class="card">
+      <h3>Patient Identification</h3>
+
+      <div class="grid">
+        <div class="field">
+          <label>ID Number *</label>
+          <input id="eId" placeholder="Enter ID Number">
+        </div>
+        <div class="field">
+          <label>Patient Name *</label>
+          <input id="eName">
+        </div>
+        <div class="field">
+          <label>Sex</label>
+          <select id="eSex">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Grade / Designation</label>
+          <input id="eGrade">
+        </div>
+        <div class="field">
+          <label>Section / Office</label>
+          <input id="eSection">
+        </div>
+      </div>
+
+      <button class="secondary" onclick="lookupEncounterPatient()">
+        Verify Patient ID
+      </button>
+      <div id="patientVerification" class="muted"></div>
+    </div>
+
+    <div class="card">
+      <h3>Encounter Details</h3>
+
+      <div class="grid">
+        <div class="field">
+          <label>Date</label>
+          <input id="eDate" type="date">
+        </div>
+        <div class="field">
+          <label>Clinic *</label>
+          <select id="eClinic">
+            <option value="">Select Clinic</option>
+            <option>MRR</option>
+            <option>LC1</option>
+            <option>LC2</option>
+            <option>GT</option>
+            <option>UH</option>
+            <option>FIELD</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Time In</label>
+          <input id="eTimeIn" type="time">
+        </div>
+        <div class="field">
+          <label>Time Out</label>
+          <input id="eTimeOut" type="time">
+        </div>
+        <div class="field">
+          <label>Temperature</label>
+          <input id="eTemp" placeholder="°C">
+        </div>
+        <div class="field">
+          <label>Pulse Rate</label>
+          <input id="ePR" placeholder="bpm">
+        </div>
+        <div class="field">
+          <label>Purpose</label>
+          <input id="ePurpose">
+        </div>
+        <div class="field">
+          <label>Incident</label>
+          <input id="eIncident">
+        </div>
+        <div class="field">
+          <label>LOA Purpose</label>
+          <input id="eLOAPurpose">
+        </div>
+        <div class="field">
+          <label>LOA</label>
+          <input id="eLOA">
+        </div>
+        <div class="field">
+          <label>Nurse / MD / EMT</label>
+          <input id="eProvider">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>FDAR Documentation</h3>
+
+      <div class="field">
+        <label>FOCUS</label>
+        <textarea id="eFocus"></textarea>
+      </div>
+
+      <div class="field">
+        <label>DATA</label>
+        <textarea id="eData"></textarea>
+      </div>
+
+      <div class="field">
+        <label>DATA Others</label>
+        <textarea id="eDataOthers"></textarea>
+      </div>
+
+      <div class="field">
+        <label>ACTIONS</label>
+        <textarea id="eActions"></textarea>
+      </div>
+
+      <div class="field">
+        <label>ACTIONS Others</label>
+        <textarea id="eActionsOthers"></textarea>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label>Medications</label>
+          <input id="eMeds">
+        </div>
+        <div class="field">
+          <label>Medications 2</label>
+          <input id="eMeds2">
+        </div>
+        <div class="field">
+          <label>Medications 3</label>
+          <input id="eMeds3">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>RESPONSE</label>
+        <textarea id="eResponse"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Remarks</label>
+        <textarea id="eRemarks"></textarea>
+      </div>
+
+      <button class="primary" onclick="saveNewEncounter()">
+        Save HSU Encounter
+      </button>
+    </div>
+  </section>
+
+
+  <!-- DAILY CENSUS -->
+  <section id="census" class="page hidden">
+    <h2>Daily Census</h2>
+
+    <div class="card">
+      <div class="grid">
+        <div class="field">
+          <label>Select Date</label>
+          <input id="censusDate" type="date">
+        </div>
+      </div>
+
+      <button class="primary" onclick="loadCensus()">
+        Generate Census
+      </button>
+
+      <div id="censusResults" style="margin-top:20px"></div>
+    </div>
+  </section>
+
+
+  <!-- ADMIN -->
+  <section id="admin" class="page hidden">
+    <h2>Administrator Panel</h2>
+
+    <div class="card">
+      <h3>Add User</h3>
+
+      <div class="grid">
+        <div class="field">
+          <label>Google Email</label>
+          <input id="newUserEmail" type="email">
+        </div>
+        <div class="field">
+          <label>Full Name</label>
+          <input id="newUserName">
+        </div>
+        <div class="field">
+          <label>Role</label>
+          <select id="newUserRole">
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="primary" onclick="addNewUser()">
+        Add User
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>Registered Users</h3>
+      <div id="usersTable"></div>
+      <button class="secondary" onclick="loadUsers()">
+        Refresh Users
+      </button>
+    </div>
+  </section>
+
+</main>
+
+
+<script>
+let APP_USER = null;
+let APP_TODAY = "";
+
+function message(text, type) {
+  const el = document.getElementById("message");
+  el.textContent = text;
+  el.className = type;
+  el.style.display = "block";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function clearMessage() {
+  const el = document.getElementById("message");
+  el.style.display = "none";
+}
+
+function fail(error) {
+  message(
+    error && error.message ? error.message : String(error),
+    "error"
+  );
+}
+
+function showPage(id, button) {
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.add("hidden");
+  });
+
+  document.getElementById(id).classList.remove("hidden");
+
+  document.querySelectorAll("nav button").forEach(b => {
+    b.classList.remove("active");
+  });
+
+  if (button) button.classList.add("active");
+
+  clearMessage();
+
+  if (id === "dashboard") loadDashboard();
+  if (id === "census") loadCensus();
+  if (id === "admin") loadUsers();
+}
+
+function initialize() {
+  google.script.run
+    .withSuccessHandler(data => {
+      APP_USER = data.user;
+      APP_TODAY = data.today;
+
+      document.getElementById("userName").textContent =
+        data.user.name;
+
+      document.getElementById("userRole").textContent =
+        data.user.role;
+
+      document.getElementById("eDate").value = APP_TODAY;
+      document.getElementById("censusDate").value = APP_TODAY;
+
+      if (data.user.role === "ADMIN") {
+        document.getElementById("adminNav")
+          .classList.remove("hidden");
+      }
+
+      loadDashboard();
+    })
+    .withFailureHandler(fail)
+    .getBootstrap();
+}
+
+
+/* DASHBOARD */
+
+function loadDashboard() {
+  google.script.run
+    .withSuccessHandler(data => {
+      document.getElementById("totalEncounters").textContent =
+        data.total;
+
+      Object.keys(data.byClinic).forEach(clinic => {
+        const el = document.getElementById("count" + clinic);
+        if (el) el.textContent = data.byClinic[clinic];
+      });
+
+      const tbody = document.getElementById("recentTable");
+
+      if (!data.recent.length) {
+        tbody.innerHTML =
+          '<tr><td colspan="5">No encounters recorded today.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.recent.map(r => `
+        <tr>
+          <td>${escapeHtml(r.time || "")}</td>
+          <td>${escapeHtml(r.name || "")}</td>
+          <td>${escapeHtml(r.idNumber || "")}</td>
+          <td>${escapeHtml(r.clinic || "")}</td>
+          <td>${escapeHtml(r.purpose || "")}</td>
+        </tr>
+      `).join("");
+    })
+    .withFailureHandler(fail)
+    .getDashboard(APP_TODAY);
+}
+
+
+/* PATIENT REGISTRY */
+
+function searchPatient() {
+  const term = document.getElementById("patientSearch").value;
+  const results = document.getElementById("patientResults");
+
+  if (!term.trim()) {
+    results.innerHTML = "";
+    return;
+  }
+
+  google.script.run
+    .withSuccessHandler(list => {
+      if (!list.length) {
+        results.innerHTML =
+          '<p class="muted">No matching patients found.</p>';
+        return;
+      }
+
+      results.innerHTML = list.map(p => `
+        <div class="patient-result"
+          onclick='selectPatient(${JSON.stringify(p).replace(/'/g,"&#39;")})'>
+          <strong>${escapeHtml(p.name)}</strong><br>
+          ID: ${escapeHtml(p.idNumber)} |
+          ${escapeHtml(p.grade || "")} |
+          ${escapeHtml(p.section || "")}
+        </div>
+      `).join("");
+    })
+    .withFailureHandler(fail)
+    .searchPatients(term);
+}
+
+function selectPatient(p) {
+  document.getElementById("eId").value = p.idNumber || "";
+  document.getElementById("eName").value = p.name || "";
+  document.getElementById("eSex").value = p.sex || "";
+  document.getElementById("eGrade").value = p.grade || "";
+  document.getElementById("eSection").value = p.section || "";
+
+  document.getElementById("patientVerification").textContent =
+    "Selected patient: " + p.name;
+
+  showPage("encounter");
+}
+
+function registerPatient() {
+  const data = {
+    idNumber: value("pId"),
+    name: value("pName"),
+    sex: value("pSex"),
+    birthdate: value("pBirth"),
+    grade: value("pGrade"),
+    section: value("pSection"),
+    contact: value("pContact")
+  };
+
+  if (!data.idNumber || !data.name) {
+    message("ID Number and Patient Name are required.", "error");
+    return;
+  }
+
+  google.script.run
+    .withSuccessHandler(result => {
+      message(result.message, "success");
+      [
+        "pId","pName","pSex","pBirth",
+        "pGrade","pSection","pContact"
+      ].forEach(id => document.getElementById(id).value = "");
+    })
+    .withFailureHandler(fail)
+    .savePatient(data);
+}
+
+
+/* VERIFY PATIENT */
+
+function lookupEncounterPatient() {
+  const id = value("eId");
+
+  if (!id) {
+    message("Enter an ID Number first.", "error");
+    return;
+  }
+
+  google.script.run
+    .withSuccessHandler(list => {
+      const match = list.find(p =>
+        String(p.idNumber).toLowerCase() === id.toLowerCase()
+      );
+
+      if (!match) {
+        document.getElementById("patientVerification")
+          .textContent = "No registered patient found. Verify details.";
+        return;
+      }
+
+      document.getElementById("eName").value = match.name || "";
+      document.getElementById("eSex").value = match.sex || "";
+      document.getElementById("eGrade").value = match.grade || "";
+      document.getElementById("eSection").value = match.section || "";
+
+      document.getElementById("patientVerification")
+        .textContent = "Patient verified: " + match.name;
+    })
+    .withFailureHandler(fail)
+    .searchPatients(id);
+}
+
+
+/* ENCOUNTER */
+
+function saveNewEncounter() {
+  const data = {
+    idNumber: value("eId"),
+    name: value("eName"),
+    sex: value("eSex"),
+    grade: value("eGrade"),
+    section: value("eSection"),
+    date: value("eDate"),
+    clinic: value("eClinic"),
+    timeIn: value("eTimeIn"),
+    timeOut: value("eTimeOut"),
+    temp: value("eTemp"),
+    pr: value("ePR"),
+    purpose: value("ePurpose"),
+    incident: value("eIncident"),
+    loaPurpose: value("eLOAPurpose"),
+    loa: value("eLOA"),
+    focus: value("eFocus"),
+    data: value("eData"),
+    dataOthers: value("eDataOthers"),
+    actions: value("eActions"),
+    actionsOthers: value("eActionsOthers"),
+    medications: value("eMeds"),
+    medications2: value("eMeds2"),
+    medications3: value("eMeds3"),
+    response: value("eResponse"),
+    provider: value("eProvider"),
+    remarks: value("eRemarks")
+  };
+
+  if (!data.idNumber || !data.name || !data.clinic) {
+    message(
+      "Patient ID Number, Patient Name, and Clinic are required.",
+      "error"
+    );
+    return;
+  }
+
+  google.script.run
+    .withSuccessHandler(result => {
+      message(
+        result.message + " Reference: " + result.encounterId,
+        "success"
+      );
+
+      loadDashboard();
+    })
+    .withFailureHandler(fail)
+    .saveEncounter(data);
+}
+
+
+/* CENSUS */
+
+function loadCensus() {
+  const date = value("censusDate") || APP_TODAY;
+
+  google.script.run
+    .withSuccessHandler(data => {
+      const rows = data.recent || [];
+      document.getElementById("censusResults").innerHTML = `
+        <h3>Total encounters: ${data.total}</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>ID Number</th>
+                <th>Clinic</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.length ? rows.map(r => `
+                <tr>
+                  <td>${escapeHtml(r.time || "")}</td>
+                  <td>${escapeHtml(r.name || "")}</td>
+                  <td>${escapeHtml(r.idNumber || "")}</td>
+                  <td>${escapeHtml(r.clinic || "")}</td>
+                  <td>${escapeHtml(r.purpose || "")}</td>
+                </tr>
+              `).join("") :
+              '<tr><td colspan="5">No records for this date.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      `;
+    })
+    .withFailureHandler(fail)
+    .getDashboard(date);
+}
+
+
+/* ADMIN */
+
+function addNewUser() {
+  const email = value("newUserEmail");
+  const name = value("newUserName");
+  const role = value("newUserRole");
+
+  google.script.run
+    .withSuccessHandler(result => {
+      message(result.message, "success");
+      loadUsers();
+    })
+    .withFailureHandler(fail)
+    .addUser(email, role, name);
+}
+
+function loadUsers() {
+  google.script.run
+    .withSuccessHandler(users => {
+      document.getElementById("usersTable").innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Active</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${users.map(u => `
+                <tr>
+                  <td>${escapeHtml(u.name || "")}</td>
+                  <td>${escapeHtml(u.email || "")}</td>
+                  <td>${escapeHtml(u.role || "")}</td>
+                  <td>${String(u.active)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    })
+    .withFailureHandler(fail)
+    .listUsers();
+}
+
+
+/* HELPERS */
+
+function value(id) {
+  return document.getElementById(id).value.trim();
+}
+
+function escapeHtml(value) {
+  return String(value == null ? "" : value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+window.addEventListener("load", initialize);
+</script>
+
+</body>
+</html>
